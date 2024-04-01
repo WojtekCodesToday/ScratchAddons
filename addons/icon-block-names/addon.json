@@ -1,0 +1,25 @@
+{
+    "name": "Icon block names",
+    "description": "Replaces some block names with icons (such as the if key pressed block)",
+    "tags": [
+        "editor",
+        "codeEditor","beta"
+    ],
+    "credits": [
+        {
+            "name": "WojtekGame",
+            "link": "https://scratch.mit.edu/users/WojtekGame/"
+        }
+    ],
+    "versionAdded": "1.37.1",
+    "enabledByDefault": false,
+    "userscripts": [
+        {
+            "url": "userscript.js",
+            "matches": [
+                "projects"
+            ],
+            "runAtComplete": false
+        }
+    ]
+}
