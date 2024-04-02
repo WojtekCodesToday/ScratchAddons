@@ -487,18 +487,127 @@ export default async function ({ addon }) {
                     args0: [
                         { type: "field_image", src: svg + "repeat.svg", width: 24, height: 24 },
                     ],
-                    args1: [ { type: "input_statement", name: "SUBSTACK" } ],
-                    args2: [ { type: "field_image", src: source + "repeat.svg", width: 24, height: 24, alt: "*", flip_rtl: true } ],
+                    args1: [{ type: "input_statement", name: "SUBSTACK" }],
+                    args2: [{ type: "field_image", src: source + "repeat.svg", width: 24, height: 24, alt: "*", flip_rtl: true }],
+                    category: ScratchBlocks.Categories.control,
+                    extensions: ["colours_control", "shape_end"]
+                });
+            }
+        };
+        ScratchBlocks.Blocks['control_if'] = {
+            init: function () {
+                this.jsonInit({
+                    id: "control_if", message0: "%1 %2", message1: "%1",
+                    lastDummyAlign2: "RIGHT",
+                    args0: [
+                        { type: "field_image", src: svg + "question_mark.svg", width: 24, height: 24 },
+                        { type: "input_value", name: "CONDITION", check: "Boolean" }
+                    ],
+                    args1: [{ type: "input_statement", name: "SUBSTACK" }],
                     category: ScratchBlocks.Categories.control,
                     extensions: ["colours_control", "shape_statement"]
                 });
             }
         };
+
+        ScratchBlocks.Blocks['control_if_else'] = {
+            init: function () {
+                this.jsonInit({
+                    id: "control_if", message0: "%1 %2", message1: "%1", message2: "%1", message3: "%1",
+                    args0: [
+                        { type: "field_image", src: svg + "question_mark.svg", width: 24, height: 24 },
+                        { type: "input_value", name: "CONDITION", check: "Boolean" }
+                    ],
+                    args1: [{ type: "input_statement", name: "SUBSTACK" }],
+                    args2: [
+                        { type: "field_image", src: svg + "exclamation.svg", width: 24, height: 24 },
+                    ],
+                    args3: [{ type: "input_statement", name: "SUBSTACK2" }],
+                    category: ScratchBlocks.Categories.control,
+                    extensions: ["colours_control", "shape_statement"]
+                });
+            }
+        };
+
+        ScratchBlocks.Blocks['control_wait_until'] = {
+            init: function () {
+                this.jsonInit({
+                    id: "control_waituntil", message0: "%1 %2 %3",
+                    args0: [
+                        { type: "field_image", src: svg + "clock.svg", width: 24, height: 24 },
+                        { type: "field_image", src: svg + "arrow_right.svg", width: 24, height: 24 },
+                        { type: "input_value", name: "CONDITION", check: "Boolean" }
+                    ],
+                    category: ScratchBlocks.Categories.control,
+                    extensions: ["colours_control", "shape_statement"]
+                });
+            }
+        };
+
+        ScratchBlocks.Blocks['control_repeat_until'] = {
+            init: function () {
+                this.jsonInit({
+                    id: "control_repeatuntil", message0: "%1 %2 %3", message1: "%1", message2: "%1",
+                    lastDummyAlign2: "RIGHT",
+                    args0: [
+                        { type: "field_image", src: svg + "clock.svg", width: 24, height: 24 },
+                        { type: "field_image", src: svg + "arrow_right.svg", width: 24, height: 24 },
+                        { type: "input_value", name: "CONDITION", check: "Boolean" }
+                    ],
+                    args1: [{ type: "input_statement", name: "SUBSTACK" }],
+                    args2: [
+                        {
+                            type: "field_image", src: source + "repeat.svg",
+                            width: 24, height: 24,
+                            alt: "*", flip_rtl: true
+                        }
+                    ],
+                    category: ScratchBlocks.Categories.control,
+                    extensions: ["colours_control", "shape_statement"]
+                });
+            }
+        };
+
+        apply("control_start_as_clone", "%1 %2", [
+            { type: "field_image", src: svg + "square.svg", width: 24, height: 24 },
+            { type: "field_image", src: svg + "clone.svg", width: 24, height: 24 },
+        ], "control", ["colours_control", "shape_hat"]);
+
+        ScratchBlocks.Blocks['control_create_clone_of'] = {
+            init: function () {
+                this.jsonInit({
+                    id: "control_start_as_clone",
+                    message0: "%1 %2 %3",
+                    args0: [
+                        { type: "field_image", src: svg + "clone.svg", width: 24, height: 24 },
+                        { type: "field_image", src: svg + "arrow_right.svg", width: 24, height: 24 },
+                        { type: "input_value", name: "CLONE_OPTION" }
+                    ],
+                    category: ScratchBlocks.Categories.control,
+                    extensions: ["colours_control", "shape_statement"]
+                });
+            }
+        };
+
+        ScratchBlocks.Blocks['control_delete_this_clone'] = {
+            init: function () {
+                this.jsonInit({
+                    message0: "%1 %2",
+                    args0: [
+                        { type: "field_image", src: svg + "clone.svg", width: 24, height: 24 },
+                        { type: "field_image", src: svg + "x.svg", width: 24, height: 24 },
+                    ],
+                    category: ScratchBlocks.Categories.control,
+                    extensions: ["colours_control", "shape_end"]
+                });
+            }
+        };
+
         //sensing
         apply("sensing_keypressed", "%1 %2", [
             { type: "field_image", src: svg + "keyboard_keys.svg", width: 24, height: 24 },
             { type: "input_value", name: "KEY_OPTION" }
-        ], "sensing", ["colours_sensing", "output_boolean"])
+        ], "sensing", ["colours_sensing", "output_boolean"]);
         motion(); looks(); sounds(); event();
     }
     addon.self.addEventListener("disabled", () => Object.assign(ScratchBlocks, oScratchBlocks));
